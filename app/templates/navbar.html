@@ -1,0 +1,61 @@
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <!-- Navbar brand -->
+    <a class="navbar-brand font-weight-bold" href="{% url 'index' %}">Neighbourhood</a>
+    
+    <!-- Collapse button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+        aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="basicExampleNav">
+            
+        {% if user.is_authenticated %}
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+
+                <li><a class="nav-item" href="{% url 'new_post' %}">Post</a></li>
+                <li><a class="nav-item" href="{% url 'profile' %}">Profile</a></li>
+                <li><a href="/accounts/password/change">Change Password</a></li>
+                <li><a href="/logout">Logout</a></li>
+
+            </li>
+        </ul>
+
+        <!-- Links -->
+
+        <!-- Search form -->
+        <form class="form-inline" action="{% url 'search' %}">
+            <div class="md-form my-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search for a business" aria-label="Search" name = "project">
+            </div>
+        </form>
+        <!-- End of search form -->
+
+        {% else %}
+
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/accounts/login">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/accounts/register">Register</a>
+            </li>
+    
+        </ul>
+
+        {% endif %}
+        
+        <!-- Links -->
+
+    </div>
+    <!-- End of collapsible content -->
+    
+</nav>
+<!--/End of navbar-->
