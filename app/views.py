@@ -41,3 +41,13 @@ def search_results(request):
         message = "You haven't searched for any business"
         
         return render(request, 'search.html', {"message": message})
+
+
+@login_required(login_url='/accounts/login')
+def business(request):
+    
+    user = request.user
+    profile = Profile.objects.get(user = request.user)
+    businesses = Business.objects.filter(neighbourhood = profile.neighbourhood)
+        
+    return render(request, 'business.html', {"businesses": businesses})
