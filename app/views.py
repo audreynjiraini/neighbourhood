@@ -21,7 +21,7 @@ def index(request):
     businesses = Business.objects.filter(neighbourhood = profile.neighbourhood)
     neighbourhood = profile.neighbourhood
     
-    return render(request, 'index.html', {"posts": posts, "businesses": businesses, "neighbourhood": neighbourhood})
+    return render(request, 'index.html', {"posts": posts, "profile": profile, "businesses": businesses, "neighbourhood": neighbourhood})
 
 
 @login_required(login_url='/accounts/login')
@@ -51,3 +51,11 @@ def business(request):
     businesses = Business.objects.filter(neighbourhood = profile.neighbourhood)
         
     return render(request, 'business.html', {"businesses": businesses})
+
+
+@login_required(login_url='/accounts/login')
+def post(request, id):
+    
+    post = Post.objects.get(id = id)
+    
+    return render(request, 'post.html', {"post": post})
