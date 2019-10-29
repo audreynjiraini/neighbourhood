@@ -24,3 +24,16 @@ class Neighbourhood(models.Model):
     def __str__(self):
         
         return self.name
+    
+    
+    
+class Business(models.Model):
+    name = models.CharField(max_length = 30)
+    email = models.EmailField(max_length = 30)
+    description = models.TextField(null=True)
+    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
+
+
+    def __str__(self):
+        
+        return self.name
