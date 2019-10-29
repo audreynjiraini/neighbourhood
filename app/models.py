@@ -24,20 +24,6 @@ class Neighbourhood(models.Model):
     def __str__(self):
         
         return self.name
-    
-    
-    
-class Business(models.Model):
-    
-    name = models.CharField(max_length = 50)
-    email = models.EmailField()
-    description = models.TextField(null=True)
-    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
-
-
-    def __str__(self):
-        
-        return self.name
 
 
 
@@ -48,6 +34,21 @@ class Profile(models.Model):
     bio = models.TextField(null=True)
     email = models.EmailField(null=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        
+        return self.name
+    
+    
+    
+class Business(models.Model):
+    
+    name = models.CharField(max_length = 50)
+    email = models.EmailField()
+    description = models.TextField(null=True)
+    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
 
     def __str__(self):
         
