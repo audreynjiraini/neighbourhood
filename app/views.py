@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import *
+from .forms import *
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
@@ -53,11 +54,61 @@ def business(request):
 
 
 @login_required(login_url='/accounts/login')
+def new_business(request):
+    
+    profile = Profile.objects.get(user = request.user)
+    
+    if request.method == 'POST':
+        
+        form = BusinessForm(request.POST)
+        
+        if form.is_valid():
+            
+            business = form.save(commit = False)
+            business.user = profile
+            business.neighbourhood = profile.neighbourhood
+            business.save()
+            
+        return redirect('business')
+    
+    else:
+        
+        form = BusinessForm()
+        
+    return render(request, 'new_business.html', {'form': form})
+
+
+@login_required(login_url='/accounts/login')
 def post(request, id):
     
     post = Post.objects.get(id = id)
     
     return render(request, 'post.html', {"post": post})
+
+
+@login_required(login_url='/accounts/login')
+def new_post(request):
+    
+    profile = Profile.objects.get(user = request.user)
+    
+    if request.method == 'POST':
+        
+        form = PostForm(request.POST)
+        
+        if form.is_valid():
+            
+            post = form.save(commit = False)
+            post.user = request.user
+            post.neighbourhood = profile.neighbourhood
+            post.save()
+            
+        return redirect('index')
+    
+    else:
+        
+        form = PostForm()
+        
+    return render(request, 'new_post.html', {"profile": profile, "form": form})
 
 
 @login_required(login_url='/accounts/login')
@@ -98,28 +149,3 @@ def edit_profile(request,username):
             form = ProfileForm()
    
     return render(request, 'edit_profile.html', {"form":form})
-
-
-@login_required(login_url='/accounts/login')
-def new_post(request):
-    
-    profile = Profile.objects.get(user = request.user)
-    
-    if request.method == 'POST':
-        
-        form = PostForm(request.POST)
-        
-        if form.is_valid():
-            
-            post = form.save(commit = False)
-            post.user = request.user
-            post.neighbourhood = profile.neighbourhood
-            post.save()
-            
-        return redirect('index')
-    
-    else:
-        
-        form = PostForm()
-        
-    return render(request, 'new_post.html', {"profile": profile, "form": form})
