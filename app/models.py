@@ -28,6 +28,7 @@ class Neighbourhood(models.Model):
     
     
 class Business(models.Model):
+    
     name = models.CharField(max_length = 30)
     email = models.EmailField(max_length = 30)
     description = models.TextField(null=True)
@@ -37,3 +38,18 @@ class Business(models.Model):
     def __str__(self):
         
         return self.name
+    
+    
+    
+class Post(models.Model):
+    
+    title = models.CharField(max_length=50)
+    content = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
+    pub_date = models.DateTimeField(auto_now_add=True, null=True)
+    
+    
+    def __str__(self):
+        
+        return self.title
