@@ -46,7 +46,6 @@ def search_results(request):
 @login_required(login_url='/accounts/login')
 def business(request):
     
-    user = request.user
     profile = Profile.objects.get(user = request.user)
     businesses = Business.objects.filter(neighbourhood = profile.neighbourhood)
         
@@ -69,3 +68,33 @@ def profile(request, username):
     businesses = Business.objects.filter(user = profile)
     
     return render(request, 'profile.html', {"profile": profile, "businesses": businesses})
+
+
+@login_required(login_url='/accounts/login')
+def edit_profile(request,username):
+    
+    profile = Profile.objects.get(user = request.user)
+    
+    if request.method == 'POST':
+        
+        form = ProfileForm(request.POST, instance = profile)
+        
+        if form.is_valid():
+            
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            
+        return redirect('profile', username = request.user)
+    
+    else:
+        
+        if Profile.objects.filter(user = request.user):
+            
+            profile = Profile.objects.get(user = request.user)
+            form = ProfileForm(instance = profile)
+            
+        else:
+            form = ProfileForm()
+   
+    return render(request, 'edit_profile.html', {"form":form})
