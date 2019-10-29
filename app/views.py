@@ -59,3 +59,13 @@ def post(request, id):
     post = Post.objects.get(id = id)
     
     return render(request, 'post.html', {"post": post})
+
+
+@login_required(login_url='/accounts/login')
+def profile(request, username):
+    
+    user = User.objects.get(username = username)
+    profile = Profile.objects.get(user = user)
+    businesses = Business.objects.filter(user = profile)
+    
+    return render(request, 'profile.html', {"profile": profile, "businesses": businesses})
