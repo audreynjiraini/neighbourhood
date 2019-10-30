@@ -5,6 +5,14 @@
 
             <h2 class="text-center">Found {{businesses | length}} of searched term {{message}}.</h2>
 
+            {% for business in businesses %}
+
+                <ol>
+                    <li>{{business.name}}</li>
+                </ol>
+
+            {% endfor %}
+
         {% else %}
 
             <h2> Found 0 businesses for the searched term {{message}}</h2>
@@ -12,19 +20,6 @@
         {% endif %}
     </div>
 
-    <div class="row">
-        {% if businesses %}
-
-            {% for business in businesses %}
-
-            <ol>
-                <li>{{business.name}}</li>
-            </ol>
-
-            {% endfor %}
-
-        {% endif %}
-    </div>
 </div>
 
 {% endblock content %}

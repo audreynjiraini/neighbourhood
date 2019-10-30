@@ -100,6 +100,13 @@ class Business(models.Model):
         
         self.name = name
         self.save()
+        
+        
+    @classmethod
+    def search_by_name(cls,search_term):
+        business = cls.objects.filter(name__icontains = search_term)
+    
+        return business
 
 
     def __str__(self):

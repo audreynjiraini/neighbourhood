@@ -33,7 +33,7 @@ def search_results(request):
         
         profile = Profile.objects.get(user = request.user)
         search_term = request.GET.get("business")
-        searched_businesses = Business.objects.filter(neighbourhood = profile.neighbourhood, name__icontains = search_term)
+        searched_businesses = Business.search_by_name(search_term)
         
         message = f"{search_term}"
 
