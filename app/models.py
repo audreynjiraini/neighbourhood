@@ -21,6 +21,35 @@ class Neighbourhood(models.Model):
     occupants = models.IntegerField(null=True, default=0)
     
     
+    def create_neighbourhood(self):
+        
+        self.save()
+    
+    
+    def delete_neighbourhood(self):
+        
+        self.delete()
+    
+    
+    @classmethod
+    def find_neighbourhood(cls, neighbourhood_id):
+        
+        neighbourhood = cls.objects.get(id = neighbourhood_id)
+        return neighbourhood
+    
+    
+    def update_neighbourhod(self, name):
+        
+        self.name = name
+        self.save()
+    
+    
+    def update_occupants(self, occupants):
+        
+        self.occupants = occupants
+        self.save()
+    
+    
     def __str__(self):
         
         return self.name
@@ -48,6 +77,29 @@ class Business(models.Model):
     description = models.TextField(null=True)
     neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    
+    
+    def create_business(self):
+        
+        self.save()
+    
+    
+    def delete_business(self):
+        
+        self.delete()
+    
+    
+    @classmethod
+    def find_business(cls, business_id):
+        
+        business = cls.objects.get(id = business_id)
+        return business
+    
+    
+    def update_business(self, name):
+        
+        self.name = name
+        self.save()
 
 
     def __str__(self):
