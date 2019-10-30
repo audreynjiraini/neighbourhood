@@ -4,12 +4,16 @@
 
 {% block content %}
     <div class="container">
+
+        <a href="{% url 'new_business' %}" class="btn btn-primary text-center">Add a business</a>
+
         {% if businesses %}
         
         <div class="card card-body my-5">
             <table class="table">
                 <thead class="black white-text">
                     <tr class="font-weight-bold">
+                        <th class="th-sm">#</th>
                         <th class="th-sm">Business Name</th>
                         <th class="th-sm">Business Description</th>
                         <th class="th-sm">Business Owner</th>
@@ -31,8 +35,9 @@
                     {% endfor %}
                 </tbody>
 
-                <tfoot>
-                    <tr>
+                <tfoot class="black white-text">
+                    <tr class="font-weight-bold">
+                        <th class="th-sm">#</th>
                         <th class="th-sm">Business Name</th>
                         <th class="th-sm">Business Description</th>
                         <th class="th-sm">Business Owner</th>
@@ -48,9 +53,10 @@
 
         <h1 class="text-center">No business available.</h1>
 
+        <a href="{% url 'new_business' %}" class="btn btn-primary">Add a business</a>
+
         {% endif %}
 
-        <a href="{% url 'new_business' %}" class="btn btn-primary">Add a new business</a>
     </div>
 
 {% endblock content %}

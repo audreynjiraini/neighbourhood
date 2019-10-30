@@ -17,6 +17,7 @@ def index(request):
     except:
         profile = Profile.objects.create(user = user, name = user.username)
         profile.save()
+        return redirect('edit_profile',username = user.username)
         
     posts = Post.objects.filter(neighbourhood = profile.neighbourhood)
     businesses = Business.objects.filter(neighbourhood = profile.neighbourhood)
@@ -82,6 +83,12 @@ def new_business(request):
 def post(request, post_id):
     
     post = Post.objects.get(id = post_id)
+    
+    try:
+        post = Post.objects.get(id = post_id)
+        
+    except Post.DoesNotExist:
+        raise Http404("Sorry. The post does not exist.")
     
     return render(request, 'post.html', {"post": post})
 
