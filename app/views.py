@@ -79,9 +79,9 @@ def new_business(request):
 
 
 @login_required(login_url='/accounts/login')
-def post(request, id):
+def post(request, post_id):
     
-    post = Post.objects.get(id = id)
+    post = Post.objects.get(id = post_id)
     
     return render(request, 'post.html', {"post": post})
 

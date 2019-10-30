@@ -5,18 +5,16 @@
 {% block content %}
     <div class="container">
         {% if businesses %}
+        
         <div class="card card-body my-5">
             <table class="table">
                 <thead class="black white-text">
                     <tr class="font-weight-bold">
-                        <th class="th-sm">Business Name
-                        </th>
-                        <th class="th-sm">Business Description
-                        </th>
-                        <th class="th-sm">Business Email
-                        </th>
-                        <th class="th-sm">Neighborhood
-                        </th>
+                        <th class="th-sm">Business Name</th>
+                        <th class="th-sm">Business Description</th>
+                        <th class="th-sm">Business Owner</th>
+                        <th class="th-sm">Business Email</th>
+                        <th class="th-sm">Neighborhood</th>
                     </tr>
                 </thead>
 
@@ -28,27 +26,31 @@
                         <td>{{business.description}}</td>
                         <td>{{business.user}}</td>
                         <td>{{business.email}}</td>
+                        <td>{{business.neighbourhood}}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
 
                 <tfoot>
                     <tr>
-                        <th class="th-sm">Business Name
-                        </th>
-                        <th class="th-sm">Business Description
-                        </th>
-                        <th class="th-sm">Business Email
-                        </th>
-                        <th class="th-sm">Neighborhood
-                        </th>
+                        <th class="th-sm">Business Name</th>
+                        <th class="th-sm">Business Description</th>
+                        <th class="th-sm">Business Owner</th>
+                        <th class="th-sm">Business Email</th>
+                        <th class="th-sm">Neighborhood</th>
                     </tr>
-                  </tfoot>
+                </tfoot>
+
             </table>
         </div>
-        {% else%}
+
+        {% else %}
+
         <h1 class="text-center">No business available.</h1>
-        {% endif%}
-        <a href="{% url 'new_business' %}" class="btn btn-primary">Add Business</a>
+
+        {% endif %}
+
+        <a href="{% url 'new_business' %}" class="btn btn-primary">Add a new business</a>
     </div>
-{% endblock %}
+
+{% endblock content %}
